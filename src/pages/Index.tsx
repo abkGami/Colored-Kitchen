@@ -85,9 +85,8 @@ const Index = () => {
           <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
             Colored Kitchen
           </h1>
-          <p className="text-lg text-white/90 max-w-md mb-6">
-            Discover our premium collection of kitchen utensils designed to make
-            your cooking experience exceptional.
+          <p className="text-lg text-white/90 max-w-md mb-6 italic">
+            Quality products that last a lifetime.
           </p>
           <div>
             <Link to="/products">

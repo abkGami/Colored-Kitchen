@@ -61,7 +61,7 @@ const ProductDetailPage = () => {
     <div className="container mx-auto px-4 py-8">
       <Link
         to="/products"
-        className="inline-flex items-center text-gray-600 hover:text-primary mb-8"
+        className="inline-flex items-center text-gray-600 hover:text-pink-500 mb-8"
       >
         <ChevronLeft className="h-5 w-5" />
         Back to Products
@@ -75,7 +75,7 @@ const ProductDetailPage = () => {
             className="w-full h-auto object-cover"
           />
           {product.trending && (
-            <span className="absolute top-4 right-4 bg-primary text-white text-sm font-medium px-3 py-1 rounded-full">
+            <span className="absolute top-4 right-4 bg-pink-500 text-white text-sm font-medium px-3 py-1 rounded-full">
               Trending
             </span>
           )}
@@ -88,7 +88,7 @@ const ProductDetailPage = () => {
             {product.category}
           </span>
 
-          <div className="text-2xl font-bold text-primary mb-6">
+          <div className="text-2xl font-bold text-pink-500 mb-6">
             ${product.price.toFixed(2)}
           </div>
 

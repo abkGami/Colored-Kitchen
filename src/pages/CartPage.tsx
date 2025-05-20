@@ -119,7 +119,9 @@ const CartPage = () => {
 
             <div className="col-span-2 flex md:justify-center items-center">
               <span className="md:hidden font-medium mr-2">Price:</span>
-              <span>${item.product.price.toFixed(2)}</span>
+              <span className="text-pink-500">
+                ${item.product.price.toFixed(2)}
+              </span>
             </div>
 
             <div className="col-span-2 flex md:justify-center items-center">
