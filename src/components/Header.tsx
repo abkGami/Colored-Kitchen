@@ -8,7 +8,7 @@ const Header = () => {
   const { cartItems } = useCart();
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm">
+    <header className="sticky top-0 z-50 bg-white shadow-xl rounded-b-2xl">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         {/* <Link to="/" className="text-2xl font-bold text-copper"> */}
         <Link to="/" className="text-2xl font-bold text-pink-500">
