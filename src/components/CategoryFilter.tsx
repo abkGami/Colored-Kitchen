@@ -1,6 +1,5 @@
-
-import React from 'react';
-import { Button } from './ui/button';
+import React from "react";
+import { Button } from "./ui/button";
 
 interface CategoryFilterProps {
   categories: string[];
@@ -18,7 +17,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
       <Button
         variant={activeCategory === null ? "default" : "outline"}
         onClick={() => onCategoryChange(null)}
-        className={`category-btn ${activeCategory === null ? 'active' : ''}`}
+        className={`category-btn ${activeCategory === null ? "active " : ""}`}
       >
         All
       </Button>
@@ -27,7 +26,9 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
           key={category}
           variant={activeCategory === category ? "default" : "outline"}
           onClick={() => onCategoryChange(category)}
-          className={`category-btn ${activeCategory === category ? 'active' : ''}`}
+          className={`category-btn ${
+            activeCategory === category ? "active " : ""
+          }`}
         >
           {category.charAt(0).toUpperCase() + category.slice(1)}
         </Button>

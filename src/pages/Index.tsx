@@ -77,7 +77,7 @@ const Index = () => {
       <section className="relative rounded-xl overflow-hidden mb-12">
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent z-10"></div>
         <img
-          src="https://images.unsplash.com/photo-1556910103-1c02745adc4b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+          src="https://images.unsplash.com/photo-1556911220-bff31c812dba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
           alt="Kitchen Utensils"
           className="w-full h-[350px] md:h-[500px] object-cover"
         />
@@ -104,11 +104,11 @@ const Index = () => {
           <SearchBar onSearch={handleSearch} />
         </div>
 
-        {trendingProducts.length > 0 && (
+        {/* {trendingProducts.length > 0 && (
           <div className="my-12">
             <TrendingProducts products={trendingProducts} />
           </div>
-        )}
+        )} */}
       </section>
 
       <section>

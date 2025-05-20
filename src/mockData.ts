@@ -271,5 +271,29 @@ export const mockData: MockData = {
       features: ["900W motor", "Multiple cup sizes", "Nutrient extraction"],
       inStock: true,
     },
+    {
+      id: 21,
+      name: "Stovetop Espresso Pot",
+      description:
+        "Classic 6-cup stovetop espresso maker made of polished aluminum. Makes rich, authentic espresso on any stovetop.",
+      price: 29.99,
+      image:
+        "https://images.unsplash.com/photo-1494314671902-399b18174975?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3",
+      category: "pot",
+      features: ["6-cup capacity", "Polished aluminum", "Classic design"],
+      inStock: true,
+    },
+    {
+      id: 22,
+      name: "Nutrient Extractor Blender",
+      description:
+        "900W nutrient extractor blender that breaks down whole fruits and vegetables for maximum nutrition. Includes various cup sizes and to-go lids.",
+      price: 79.99,
+      image:
+        "https://images.unsplash.com/photo-1619257103384-acf5776a6e28?q=80&w=2864&auto=format&fit=crop&ixlib=rb-4.0.3",
+      category: "blender",
+      features: ["900W motor", "Multiple cup sizes", "Nutrient extraction"],
+      inStock: true,
+    },
   ],
 };
