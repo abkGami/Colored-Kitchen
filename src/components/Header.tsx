@@ -16,7 +16,7 @@ const Header = () => {
         </Link>
         <div className="flex items-center gap-4">
           <Link to="/cart" className="relative">
-            <Button variant="" size="icon">
+            <Button variant="ghost" size="icon">
               <ShoppingCart className="h-5 w-5" />
               {cartItems.length > 0 && (
                 <span className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs font-medium rounded-full w-5 h-5 flex items-center justify-center">
