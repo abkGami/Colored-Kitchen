@@ -1,10 +1,9 @@
-
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from './ui/button';
-import { ShoppingCart } from 'lucide-react';
-import { useCart } from '@/hooks/useCart';
-import { Product } from '@/types';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Button } from "./ui/button";
+import { ShoppingCart } from "lucide-react";
+import { useCart } from "@/hooks/useCart";
+import { Product } from "@/types";
 
 interface ProductCardProps {
   product: Product;
@@ -12,7 +11,7 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addToCart } = useCart();
-  
+
   return (
     <div className="product-card bg-white rounded-lg overflow-hidden border border-gray-200 flex flex-col h-full">
       <Link to={`/product/${product.id}`} className="overflow-hidden">
@@ -23,15 +22,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         />
       </Link>
       <div className="p-3 sm:p-4 flex-1 flex flex-col">
-        <h3 className="font-semibold text-base sm:text-lg mb-1 hover:text-copper truncate">
+        <h3 className="font-semibold text-base sm:text-lg mb-1 hover:text-pink-500 truncate">
           <Link to={`/product/${product.id}`}>{product.name}</Link>
         </h3>
-        <span className="text-xs sm:text-sm text-gray-500 mb-2">{product.category}</span>
+        <span className="text-xs sm:text-sm text-gray-500 mb-2">
+          {product.category}
+        </span>
         <div className="mt-auto pt-3 sm:pt-4 flex items-center justify-between">
-          <span className="font-bold text-base sm:text-lg">${product.price.toFixed(2)}</span>
-          <Button 
-            variant="outline" 
-            size="sm" 
+          <span className="font-bold text-base sm:text-lg">
+            ${product.price.toFixed(2)}
+          </span>
+          <Button
+            variant="outline"
+            size="sm"
             className="gap-1"
             onClick={() => addToCart(product)}
           >
