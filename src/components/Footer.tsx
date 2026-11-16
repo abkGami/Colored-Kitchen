@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -19,20 +19,20 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="text-gray-600 hover:text-pink-500">
+                <Link href="/" className="text-gray-600 hover:text-pink-500">
                   Home
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/products"
+                  href="/products"
                   className="text-gray-600 hover:text-pink-500"
                 >
                   All Products
                 </Link>
               </li>
               <li>
-                <Link to="/cart" className="text-gray-600 hover:text-pink-500">
+                <Link href="/cart" className="text-gray-600 hover:text-pink-500">
                   Cart
                 </Link>
               </li>

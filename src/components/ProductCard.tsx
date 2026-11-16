@@ -1,5 +1,8 @@
+'use client';
+
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import Image from "next/image";
 import { Button } from "./ui/button";
 import { ShoppingCart } from "lucide-react";
 import { useCart } from "@/hooks/useCart";
@@ -14,16 +17,28 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <div className="product-card bg-white rounded-lg overflow-hidden border border-gray-200 flex flex-col h-full">
-      <Link to={`/product/${product.id}`} className="overflow-hidden">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-40 sm:h-48 object-cover hover:scale-105 transition-transform duration-300"
-        />
+      <Link href={`/product/${product.id}`} className="overflow-hidden">
+        <div className="relative w-full h-40 sm:h-48">
+          {product.images[0] ? (
+            <Image
+              src={product.images[0]}
+              alt={product.name}
+              fill
+              className="object-cover hover:scale-105 transition-transform duration-300"
+              sizes="(max-width: 768px) 25vw, (max-width: 1200px) 12vw, 240px"
+              quality={80}
+              onError={() => {}}
+            />
+          ) : (
+            <div className="flex h-full items-center justify-center text-muted-foreground">
+              No image
+            </div>
+          )}
+        </div>
       </Link>
       <div className="p-3 sm:p-4 flex-1 flex flex-col">
         <h3 className="font-semibold text-base sm:text-lg mb-1 hover:text-pink-500 truncate">
-          <Link to={`/product/${product.id}`}>{product.name}</Link>
+          <Link href={`/product/${product.id}`}>{product.name}</Link>
         </h3>
         <span className="text-xs sm:text-sm text-gray-500 mb-2">
           {product.category}

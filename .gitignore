@@ -11,6 +11,15 @@ node_modules
 dist
 dist-ssr
 *.local
+.env.local.bak
+
+# Next.js
+.next/
+next-env.d.ts
+*.tsbuildinfo
+
+# Tooling state
+.kilo/
 
 # Editor directories and files
 .vscode/*
