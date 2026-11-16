@@ -67,9 +67,6 @@ general marketplace.
   accumulate unused numbers.
 - The cart is client-side (`src/hooks/useCart.tsx`); there is no order pipeline
   or customer record in this repository.
-- `src/integrations/supabase/client.ts` holds an unused Supabase client with a
-  hardcoded project URL and publishable key. It is dead code; nothing imports
-  it. Recorded here so it is not mistaken for an active data layer.
 - `Header` and `Footer` are built but not mounted in `src/app/layout.tsx`, so
   the storefront currently renders no global navigation.
 
