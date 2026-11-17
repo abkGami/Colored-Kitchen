@@ -32,7 +32,7 @@ export default function ProductsShell({
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="relative mb-12 rounded-xl overflow-hidden h-[300px] md:h-[400px]">
+      <div className="relative mb-12 rounded-xl overflow-hidden h-[240px] md:h-[320px]">
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent z-10"></div>
         <Image
           src="https://images.unsplash.com/photo-1556911220-bff31c812dba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"

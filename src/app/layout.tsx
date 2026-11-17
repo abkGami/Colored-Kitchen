@@ -1,10 +1,18 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
+import { Italiana } from "next/font/google";
 import "./../index.css";
 import { Providers } from "./providers";
 
+const italiana = Italiana({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+  variable: "--font-brand-face",
+});
+
 export const metadata: Metadata = {
-  title: "Kitchen Utensil Emporium",
+  title: "Colored Kitchen",
   description: "Premium kitchen utensils for every cooking need.",
 };
 
@@ -14,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={italiana.variable}>
       <head>
         <link
           rel="preconnect"

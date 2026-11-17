@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { UserButton } from "@clerk/nextjs";
 
 import AdminNav from "@/components/admin/AdminNav";
+import BrandWordmark from "@/components/BrandWordmark";
 import { Badge } from "@/components/ui/badge";
 import { requireAdmin } from "@/lib/admin-auth";
 import { clerkAppearance } from "@/lib/clerk-appearance";
@@ -27,9 +28,9 @@ export default async function AdminLayout({
             <div className="flex items-center gap-3">
               <Link
                 href="/"
-                className="text-2xl font-bold text-pink-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                className="inline-flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4"
               >
-                Colored Kitchen
+                <BrandWordmark className="brand-wordmark--header" />
               </Link>
               <Badge variant="secondary">Admin</Badge>
             </div>

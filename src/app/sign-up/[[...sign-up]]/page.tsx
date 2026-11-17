@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import BrandWordmark from "@/components/BrandWordmark";
 
 export const metadata: Metadata = {
   title: "Accounts · Colored Kitchen",
@@ -12,9 +13,9 @@ export default function SignUpPage() {
     <main className="flex min-h-screen flex-col items-center justify-center gap-6 bg-muted/40 px-4 py-12">
       <Link
         href="/"
-        className="text-2xl font-bold text-pink-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        className="inline-block rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4"
       >
-        Colored Kitchen
+        <BrandWordmark className="brand-wordmark--header" />
       </Link>
 
       {/* Public sign-up is disabled on the Clerk instance (sign_up_mode:

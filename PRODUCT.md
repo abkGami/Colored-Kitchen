@@ -35,7 +35,8 @@ general marketplace.
 
 - Content lives in Sanity (`product` and `homePage` documents). The storefront
   reads the `published` perspective and revalidates cached pages every 60
-  seconds (`src/app/page.tsx`, `src/app/products/page.tsx`).
+  seconds (`src/app/(storefront)/page.tsx`,
+  `src/app/(storefront)/products/page.tsx`).
 - Sanity Studio is mounted at `/studio` and is the existing editing surface:
   product CRUD, the `homePage` singleton, and Vision (GROQ console).
 - Deployed on Vercel behind a Sanity CDN; images are served from
@@ -46,7 +47,7 @@ general marketplace.
 ## Capabilities and Constraints
 
 - Next.js 16 App Router, React 19, Tailwind + shadcn/ui (default style, CSS
-  variables), Poppins throughout, TypeScript.
+  variables), Poppins through the UI and Italiana for the wordmark, TypeScript.
 - Staff edit the catalog in two places: a storefront-styled admin at `/admin`
   (products CRUD and the home page singleton) and Sanity Studio at `/studio`
   for drafts, revision history, Vision and the asset library.
@@ -67,16 +68,19 @@ general marketplace.
   accumulate unused numbers.
 - The cart is client-side (`src/hooks/useCart.tsx`); there is no order pipeline
   or customer record in this repository.
-- `Header` and `Footer` are built but not mounted in `src/app/layout.tsx`, so
-  the storefront currently renders no global navigation.
+- The `(storefront)` route group mounts `Header` and `Footer` around the home,
+  products, product detail and cart routes. Admin, Studio and the auth pages sit
+  outside that group, so they keep their own chrome.
 
 ## Brand Commitments
 
-- Name: **Colored Kitchen**. The browser title and footer still say "Kitchen
-  Utensil Emporium"; the storefront header wordmark is "Colored Kitchen".
+- Name: **Colored Kitchen**. The browser title, storefront header and footer,
+  and the auth/admin wordmark use it. The footer no longer carries the legacy
+  "Kitchen Utensil Emporium" name.
 - Voice: plain, warm, product-first. No hype, no urgency devices.
 - Palette already in code: copper `--primary` (`25 56% 46%`), pink accent used
-  for hover and category selection, white surfaces, `rounded-2xl` nav chrome.
+  for hover and category selection, white surfaces, a warm paper footer, and a
+  slim bordered storefront header.
 - Contact details in `src/components/Footer.tsx` are real and must not be
   replaced.
 

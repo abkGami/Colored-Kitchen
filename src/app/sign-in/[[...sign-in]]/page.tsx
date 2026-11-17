@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import { SignIn } from "@clerk/nextjs";
+import BrandWordmark from "@/components/BrandWordmark";
 import { clerkAppearance } from "@/lib/clerk-appearance";
 
 export const metadata: Metadata = {
@@ -15,9 +16,9 @@ export default function SignInPage() {
       <div className="text-center">
         <Link
           href="/"
-          className="text-2xl font-bold text-pink-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          className="inline-block rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4"
         >
-          Colored Kitchen
+          <BrandWordmark className="brand-wordmark--header" />
         </Link>
         <p className="mt-2 text-sm text-muted-foreground">
           Staff access. Shoppers never need an account.

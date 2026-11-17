@@ -1,14 +1,28 @@
+import Link from "next/link";
+
+import BrandWordmark from "@/components/BrandWordmark";
+import { Button } from "@/components/ui/button";
+
 const NotFound = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">404</h1>
-        <p className="text-xl text-gray-600 mb-4">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 hover:text-blue-700 underline">
-          Return to Home
-        </a>
+    <main className="flex min-h-screen flex-col items-center justify-center gap-8 bg-muted/40 px-4 text-center">
+      <Link
+        href="/"
+        className="inline-block rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4"
+      >
+        <BrandWordmark className="brand-wordmark--header" />
+      </Link>
+
+      <div>
+        <h1 className="text-3xl font-bold sm:text-4xl">Page not found</h1>
+        <p className="mt-3 text-muted-foreground">
+          That page is not part of the catalog.
+        </p>
+        <Button asChild className="mt-6">
+          <Link href="/">Back to the shop</Link>
+        </Button>
       </div>
-    </div>
+    </main>
   );
 };
 

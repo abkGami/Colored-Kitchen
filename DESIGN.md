@@ -6,14 +6,15 @@ each claim names the file that owns it. Change the code, then change this file.
 ## World
 
 A warm, high-street kitchenware storefront. White surfaces, one hot accent, heavy rounded cards,
-and Poppins everywhere. It should feel like a well-lit shop floor, not a SaaS dashboard — which is
-also why the admin inherits the storefront rather than introducing a second visual language.
+Poppins through the UI, and an Italiana wordmark. It should feel like a well-lit shop floor, not a
+SaaS dashboard — which is also why the admin inherits the storefront rather than introducing a
+second visual language.
 
 Two documents bound any design work here:
 
 - `PRODUCT.md` — what the business is (a real store with live customers; "projects" in the owner's
   vocabulary means a catalog product).
-- `.impeccable/surfaces/src-app-admin.md` — the admin surface brief and its direction contract.
+- This file — the shipped visual system and the contract for changing it.
 
 ## Tokens
 
@@ -34,17 +35,26 @@ All values are HSL channel triplets consumed as `hsl(var(--token))`.
 Named accent colours also exist in Tailwind config: `copper #B87333`, `copper-light #D2946B`,
 `terracotta #E08362`. They are available but the shipped UI mostly uses the tokens above.
 
+The wordmark adds two ink tokens in `src/index.css`: `--brand-copper-ink` (`25 58% 33%`) and
+`--brand-rose-ink` (`342 44% 34%`), plus `--font-brand` for Italiana and two surface tokens used by
+the footer: `--brand-paper` (`36 38% 97%`) and `--brand-muted` (`28 12% 38%`). Both inks clear
+4.5:1 on white; `--brand-muted` clears 4.5:1 on `--brand-paper`.
+
 **One fork worth naming.** The brand pink (`pink-500`, Tailwind's stock `#ec4899`) is hard-coded in
-`src/components/Header.tsx:15`, `src/components/ProductCard.tsx:33`, `src/components/admin/AdminNav.tsx:40`
-and `src/components/admin/ProductsTable.tsx:204` for the logo, cart badge, active nav underline, and
-link hover — while `--primary` copper drives solid buttons (`bg-primary` via `src/components/ui/button.tsx`).
-So there are two accent values living side by side. It is the incumbent look, and the admin matches it
-deliberately; treat unifying them as a store-wide decision, not an admin fix.
+`src/components/ProductCard.tsx:33`, `src/components/admin/AdminNav.tsx:40` and
+`src/components/admin/ProductsTable.tsx:204` for product titles, the active admin nav underline, and
+link hover — while `--primary` copper drives solid buttons (`bg-primary` via
+`src/components/ui/button.tsx`). So there are two accent values living side by side. It is the
+incumbent look, and the admin matches it deliberately; treat unifying them as a store-wide decision,
+not an admin fix. The storefront header and footer use the brand inks instead.
 
 ## Type
 
-One family: **Poppins** (300–700), loaded in `src/app/layout.tsx` and applied globally through
-`body { @apply font-poppins }` in `src/index.css`. No second face, no display face.
+Body and UI are **Poppins** (300–700), loaded in `src/app/layout.tsx` and applied globally through
+`body { @apply font-poppins }` in `src/index.css`. One display face sits above it: **Italiana**
+(400), loaded with `next/font` in `src/app/layout.tsx` as `--font-brand-face` and consumed by
+`--font-brand` and `BrandWordmark`. It is reserved for the wordmark in the storefront header and
+footer, the admin header, and the auth/404 pages.
 
 Observed scale, by role:
 
@@ -56,10 +66,13 @@ Observed scale, by role:
 
 ## Layout
 
-- Shell: `container mx-auto px-4 py-8`, `pb-20` on the admin so the last card clears the fold
-  (`src/app/admin/layout.tsx`).
-- Header: `sticky top-0 z-50 bg-white shadow-xl rounded-b-2xl`, logo left in pink bold, nav in a
-  bordered row beneath (`src/components/Header.tsx`, mirrored in `src/app/admin/layout.tsx`).
+- Shell: the storefront wraps pages in `src/app/(storefront)/layout.tsx` with a skip link, header,
+  flexible main, and footer. Pages keep `container mx-auto px-4 py-8`; the admin adds `pb-20` so
+  the last card clears the fold (`src/app/admin/layout.tsx`).
+- Header: a slim `sticky top-0 z-50` white bar with one 1px bottom border and no shadow. A
+  three-column grid holds Shop left, the centred Italiana wordmark, and Cart right with a rose
+  count badge (`src/components/Header.tsx`). It is not used by admin or Studio, whose header keeps
+  the older rounded/shadow chrome (`src/app/admin/layout.tsx`).
 - Cards: `rounded-lg border border-border bg-white`, generous internal padding, no drop shadows at rest.
 - Product cards lift on hover — `.product-card` in `src/index.css` (`hover:shadow-lg hover:-translate-y-1`).
 - Grids: 1-up by default, 2-up at `xs`, 3-up at `md`, 4-up at `lg` (`src/components/ProductGrid.tsx:21`).
@@ -67,7 +80,7 @@ Observed scale, by role:
 
 ## Storefront surfaces
 
-**Product page (`src/app/product/[id]`, `src/components/ProductDetailShell.tsx`, `src/components/ProductImageGallery.tsx`).**
+**Product page (`src/app/(storefront)/product/[id]`, `src/components/ProductDetailShell.tsx`, `src/components/ProductImageGallery.tsx`).**
 The lead image fills a rounded card and carries copper previous/next arrows
 vertically centred on its left and right edges (`GalleryArrow`); clicking the
 image opens a full-screen lightbox showing it at a larger size. When a product
@@ -76,7 +89,7 @@ lightbox carries the same arrows plus an image counter. Arrow keys step through
 the gallery anywhere on the page. The product's serial number shows beside the
 category ("Product #4").
 
-**Home page (`src/app/page.tsx`).**
+**Home page (`src/app/(storefront)/page.tsx`).**
 The hero is a carousel of `heroItems`: each slide carries its own image, heading,
 subheading and call to action, so the copy changes with the image. Slides are
 edited per image on `/admin/home` (and in Studio); up to five. It cycles with
@@ -87,6 +100,15 @@ before. Documents saved before the per-slide model still read through a
 compatibility projection that lends each old image the document heading, so the
 carousel never disappears between a schema change and the next save.
 
+Every route in `src/app/(storefront)` is framed by the centred header wordmark
+and the warm paper footer. The wordmark sets "Colored" in copper ink and
+"Kitchen" in rose ink on one Italiana line; the header carries it at 24–32px,
+the footer at 32–44px, and the auth/admin/404 pages reuse the same mark. The
+footer keeps the real shop contact details and the legacy store name is gone.
+Admin, Studio, and the auth routes sit outside the storefront group, so the
+header and footer never wrap those surfaces. The browser title is "Colored
+Kitchen" (`src/app/layout.tsx`).
+
 ## Components
 
 `src/components/ui/*` is shadcn/ui on Radix. Use it; don't hand-roll a control.
@@ -95,6 +117,9 @@ Inventory in active use: `button`, `input`, `textarea`, `label`, `select`, `swit
 
 Specifics worth keeping:
 
+- `BrandWordmark` (`src/components/BrandWordmark.tsx`) is one Italiana line with
+  copper "Colored" and rose "Kitchen". Size comes from
+  `.brand-wordmark--header` / `--footer`; the mark is a link wherever it appears.
 - Primary button = `bg-primary` copper, white text, `rounded-md`.
 - Image arrows = `GalleryArrow` (`src/components/GalleryArrow.tsx`): a copper
   circle with a white chevron, `rounded-full`, offset shadow and hairline ring
@@ -132,16 +157,20 @@ Its contract (`src/components/admin/`):
 
 - Semantic `table`/`thead`/`th`, labelled inputs via `Label htmlFor`, `useId` for generated ids.
 - Every icon-only affordance carries `aria-hidden` on the icon plus a text label or `aria-label`.
+  The storefront cart link announces its item count, and the active Shop/Cart link carries
+  `aria-current="page"`.
+- The storefront layout opens with a skip link to `#main-content`; it is off-screen until focused.
 - Contrast: near-black on white for body, `--muted-foreground` only for secondary copy — not for
-  anything a user must read to act.
-- Reduced-motion: keep transitions to hover shadow/translate; nothing autoplays.
+  anything a user must read to act. Footer secondary text uses `--brand-muted` on `--brand-paper`.
+- Reduced-motion: keep transitions to hover shadow/translate; nothing autoplays. Header colour
+  transitions are removed under `prefers-reduced-motion`.
 
 ## Auth surfaces
 
 Clerk owns identity; the storefront's visual language owns the pages. Three
 routes live outside the storefront chrome:
 
-- `/sign-in` — centred card on `bg-muted/40`, the pink wordmark above it, one
+- `/sign-in` — centred card on `bg-muted/40`, the Italiana wordmark above it, one
   line of plain-language context. The prebuilt Clerk component sits inside
   `<Suspense>`; signed-in visitors are bounced to `/admin` automatically.
 - `/sign-up` — deliberately **not** a form. Public sign-up is off on the Clerk
@@ -172,4 +201,4 @@ provider-level `appearance` is ignored (it must be set on each component), and
 
 1. Change the token in `src/index.css` (or the Tailwind config for structural values).
 2. Prove it on the storefront and `/admin` in the same pass — both read the same tokens.
-3. Re-shoot at 1280×900 and 390×844 before calling it done.
+3. Re-shoot at 1280×900, 390×844 and 320×700 before calling it done.

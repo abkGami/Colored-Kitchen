@@ -1,6 +1,4 @@
-import Link from "next/link";
 import { getHomePage, getProducts } from "@/lib/sanity";
-import { Product } from "@/types";
 import HomeShell from "@/components/HomeShell";
 import HeroCarousel from "@/components/HeroCarousel";
 

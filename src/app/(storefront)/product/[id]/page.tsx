@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+﻿import { notFound } from "next/navigation";
 import { getProduct } from "@/lib/sanity";
 import ProductDetailShell from "@/components/ProductDetailShell";
 

@@ -1,35 +1,65 @@
 'use client';
 
-import React from "react";
 import Link from "next/link";
-import { ShoppingCart, Search } from "lucide-react";
-import { Button } from "./ui/button";
+import { usePathname } from "next/navigation";
+import { ShoppingCart } from "lucide-react";
+
+import BrandWordmark from "@/components/BrandWordmark";
 import { useCart } from "@/hooks/useCart";
 
-const Header = () => {
-  const { cartItems } = useCart();
+export default function Header() {
+  const pathname = usePathname();
+  const { getTotalItems } = useCart();
+  const itemCount = getTotalItems();
+  const shopActive =
+    pathname === "/products" || pathname.startsWith("/product/");
+  const cartActive = pathname === "/cart";
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-xl rounded-b-2xl">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="text-2xl font-bold text-pink-500">
-          Colored Kitchen
-        </Link>
-        <div className="flex items-center gap-4">
-          <Link href="/cart" className="relative">
-            <Button variant="ghost" size="icon">
-              <ShoppingCart className="h-5 w-5" />
-              {cartItems.length > 0 && (
-                <span className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs font-medium rounded-full w-5 h-5 flex items-center justify-center">
-                  {cartItems.length}
+    <header className="store-header">
+      <div className="container mx-auto px-4">
+        <div className="store-header__inner">
+          <nav aria-label="Shop" className="store-header__nav">
+            <Link
+              href="/products"
+              className="store-header__link"
+              aria-current={shopActive ? "page" : undefined}
+            >
+              Shop
+            </Link>
+          </nav>
+
+          <Link
+            href="/"
+            className="store-header__brand"
+            aria-label="Colored Kitchen, home"
+          >
+            <BrandWordmark className="brand-wordmark--header" />
+          </Link>
+
+          <div className="store-header__nav store-header__nav--end">
+            <Link
+              href="/cart"
+              className="store-header__cart"
+              aria-label={
+                itemCount === 1 ? "Cart, 1 item" : `Cart, ${itemCount} items`
+              }
+              aria-current={cartActive ? "page" : undefined}
+            >
+              <ShoppingCart
+                className="store-header__cart-icon"
+                aria-hidden="true"
+              />
+              <span className="store-header__cart-label">Cart</span>
+              {itemCount > 0 && (
+                <span className="store-header__count" aria-hidden="true">
+                  {itemCount}
                 </span>
               )}
-            </Button>
-          </Link>
+            </Link>
+          </div>
         </div>
       </div>
     </header>
   );
-};
-
-export default Header;
+}
